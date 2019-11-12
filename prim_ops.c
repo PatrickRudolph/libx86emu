@@ -2266,7 +2266,9 @@ void idiv_long(x86emu_t *emu, u32 s)
 	} while (counter > -1);
 	/* overflow */
 	if (abs_h_dvd || (l_dvd > abs_s)) {
-		INTR_RAISE_DIV0(emu);
+		 emu->x86.R_EAX = 0;
+		 emu->x86.R_EDX = 0;
+	//	INTR_RAISE_DIV0(emu);
 		return;
 	}
 	/* sign */
