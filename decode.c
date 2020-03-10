@@ -234,7 +234,7 @@ API_SYM unsigned x86emu_run(x86emu_t *emu, unsigned flags)
       if(rs) x86emu_stop(emu);
     }
 
-    (*x86emu_optab[op1])(emu, op1);
+    x86emu_optab(emu, op1);
 
     *emu->x86.disasm_ptr = 0;
 

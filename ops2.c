@@ -2063,7 +2063,7 @@ static void x86emuOp2_bswap(x86emu_t *emu, u8 op2)
 /***************************************************************************
  * Double byte operation code table:
  **************************************************************************/
-void (*x86emu_optab2[256])(x86emu_t *emu, u8) =
+static void (*optab2[256])(x86emu_t *emu, u8) =
 {
   /*  0x00 */ x86emuOp2_opc_00,      /* Group F (ring 0 PM)      */
   /*  0x01 */ x86emuOp2_opc_01,      /* Group G (ring 0 PM)      */
@@ -2338,3 +2338,7 @@ void (*x86emu_optab2[256])(x86emu_t *emu, u8) =
   /*  0xff */ x86emuOp2_illegal_op,
 };
 
+void x86emu_optab2(x86emu_t *emu, u8 op2)
+{
+        (*optab2[op2])(emu, op2);
+}

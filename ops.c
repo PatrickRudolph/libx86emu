@@ -480,7 +480,7 @@ static void x86emuOp_two_byte(x86emu_t *emu, u8 op1)
 {
   u8 op2 = fetch_byte(emu);
 
-  (*x86emu_optab2[op2])(emu, op2);
+  x86emu_optab2(emu, op2);
 }
 
 
@@ -5358,7 +5358,7 @@ static void x86emuOp_opcFF_word_RM(x86emu_t *emu, u8 op1)
 /***************************************************************************
  * Single byte operation code table:
  **************************************************************************/
-void (*x86emu_optab[256])(x86emu_t *emu, u8) =
+static void (*optab[256])(x86emu_t *emu, u8) =
 {
   /*  0x00 */ x86emuOp_op_A_byte_RM_R,
   /*  0x01 */ x86emuOp_op_A_word_RM_R,
@@ -5659,3 +5659,7 @@ void (*x86emu_optab[256])(x86emu_t *emu, u8) =
   /*  0xff */ x86emuOp_opcFF_word_RM,
 };
 
+void x86emu_optab(x86emu_t *emu, u8 op1)
+{
+	(*optab[op1])(emu, op1);
+}
